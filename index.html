@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuesioner Feedback Data MT - TVRI</title>
+    <title>Kuesioner Feedback Pegawai - LPP TVRI</title>
     <link rel="icon" type="image/png" href="assets/logotvri.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
@@ -310,7 +310,7 @@
             <div class="header">
                 <img src="assets/logotvri.png" alt="TVRI Logo" style="max-height: 80px; margin-bottom: 24px;">
                 <h1>Feedback Sikap dan Perilaku</h1>
-                <p>Silakan isi kuesioner evaluasi perilaku kerja di bawah ini secara objektif.</p>
+                <p>Silakan isi feedback pada pegawai yang satu satker dengan Anda</p>
             </div>
 
             <form id="feedbackForm">
@@ -366,15 +366,15 @@
 
                 <!-- Dropdown Nama Pegawai -->
                 <div class="form-group">
-                    <label for="nama">Nama Pegawai</label>
+                    <label for="nama">Nama Pegawai yang Dinilai</label>
                     <select id="nama" name="nama" required disabled>
-                        <option value="" disabled selected>Pilih Nama Pegawai...</option>
+                        <option value="" disabled selected>Pilih Nama Pegawai yang Dinilai...</option>
                     </select>
                 </div>
 
                 <!-- Peran -->
                 <div class="form-group">
-                    <label>Peran</label>
+                    <label>Peran Anda terhadap Pegawai yang Dinilai</label>
                     <div class="radio-choices">
                         <div class="radio-card">
                             <input type="radio" id="atasan" name="peran" value="Atasan" required>
@@ -545,13 +545,13 @@
         window.addEventListener('load', () => {
             form.reset();
             namaSelect.disabled = true;
-            namaSelect.innerHTML = '<option value="" disabled selected>Pilih Nama Pegawai...</option>';
+            namaSelect.innerHTML = '<option value="" disabled selected>Pilih Nama Pegawai yang Dinilai...</option>';
         });
 
         // Dependent Dropdown Logic
         satkerSelect.addEventListener('change', () => {
             const selectedSatker = satkerSelect.value;
-            namaSelect.innerHTML = '<option value="" disabled selected>Pilih Nama Pegawai...</option>';
+            namaSelect.innerHTML = '<option value="" disabled selected>Pilih Nama Pegawai yang Dinilai...</option>';
             
             if (selectedSatker && pegawaiData[selectedSatker]) {
                 namaSelect.disabled = false;
@@ -606,6 +606,8 @@
                     showStatus('Jawaban Anda berhasil direkam. Terima kasih!', 'success');
                     form.reset();
                     namaSelect.disabled = true;
+                    // Scroll to top after successful submission
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 } else {
                     throw new Error(result.error || 'Terjadi kesalahan saat menyimpan data.');
                 }
